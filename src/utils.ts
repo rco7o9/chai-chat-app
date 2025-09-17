@@ -34,7 +34,7 @@ export const sendMessageToLLM = async (
       chat_history: adaptMessagesForLLM(messages),
     }),
   })
-    .then(async (response) => {
+    .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok " + response.statusText);
       }
@@ -43,6 +43,6 @@ export const sendMessageToLLM = async (
     })
     .then((parsedResponse) => parsedResponse.model_output)
     .catch((error) => {
-      console.error("Error:", error);
+      throw error;
     });
 };

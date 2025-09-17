@@ -19,13 +19,17 @@ export type OnAction = (params: {
 export type LLMChatState = {
   messages: Array<ChatMessage>;
   loading: boolean;
+  error: string | undefined;
 };
 
 type ReturnUseLLMChat = [onAction: OnAction, state: LLMChatState];
 
+const ERROR_MESSAGE = "Something went wrong! Please try again.";
+
 export const useLLMChat = (): ReturnUseLLMChat => {
   const [messages, setMessages] = useState<LLMChatState["messages"]>([]);
   const [loading, setLoading] = useState<LLMChatState["loading"]>(false);
+  const [error, setError] = useState<LLMChatState["error"]>(undefined);
 
   const onAction: ReturnUseLLMChat[0] = useCallback(
     (params) => {
@@ -44,25 +48,45 @@ export const useLLMChat = (): ReturnUseLLMChat => {
 
           // set loading states correctly
           setLoading(true);
+          setError(undefined);
           setMessages([...updatedChatMessages, LOADING_MESSAGE]);
 
-          sendMessageToLLM(updatedChatMessages).then((botResponse) => {
+          const updateMessagesOnResponse = (
+            llmResponse: string,
+            error?: string,
+          ) => {
             setLoading(false);
+
             setMessages((prev) => {
               const chatMessagesWithoutLoadingMessage = prev.filter(
                 (msg) => msg.id !== LOADING_MESSAGE.id,
               );
 
-              return [
-                ...chatMessagesWithoutLoadingMessage,
-                {
+              if (!error) {
+                chatMessagesWithoutLoadingMessage.push({
                   id: uuidv4(),
-                  message: botResponse ?? "Something went wrong!!",
+                  message: llmResponse ?? ERROR_MESSAGE,
                   sender: SENDER.Bot,
-                },
-              ];
+                });
+              } else {
+                setError(ERROR_MESSAGE);
+              }
+
+              return chatMessagesWithoutLoadingMessage;
             });
-          });
+          };
+
+          try {
+            sendMessageToLLM(updatedChatMessages)
+              .then((llmResponse) => {
+                updateMessagesOnResponse(llmResponse);
+              })
+              .catch(() => {
+                updateMessagesOnResponse("", ERROR_MESSAGE);
+              });
+          } catch (e) {
+            updateMessagesOnResponse("", ERROR_MESSAGE);
+          }
 
           break;
         }
@@ -74,5 +98,5 @@ export const useLLMChat = (): ReturnUseLLMChat => {
     [messages],
   );
 
-  return [onAction, { messages, loading }];
+  return [onAction, { messages, loading, error }];
 };
