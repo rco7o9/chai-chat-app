@@ -3,6 +3,9 @@ import { useRef, useState, useLayoutEffect } from "react";
 import { Textarea } from "baseui/textarea";
 import { Button } from "baseui/button";
 
+// icons
+import { FaArrowUp } from "react-icons/fa6";
+
 const TEXT_AREA_OVERRIDES = {
   Root: {
     style: () => ({
@@ -47,7 +50,7 @@ export const ChatControls = () => {
       />
       <div>
         <Button size="compact" shape="circle">
-          Send
+          <FaArrowUp size={18} />
         </Button>
       </div>
     </div>

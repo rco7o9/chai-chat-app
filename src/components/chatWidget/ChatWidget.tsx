@@ -2,6 +2,7 @@
 import { JSX } from "react";
 
 // components
+import { ChatBody } from "./components/ChatBody";
 import { ChatControls } from "./components/ChatControls";
 
 // images
@@ -17,7 +18,7 @@ export const ChatWidget = (): JSX.Element => {
       }}
       className="relative h-full w-lg m-auto p-4 rounded-2xl flex flex-col justify-between gap-10"
     >
-      <div>chat body</div>
+      <ChatBody className="flex-1" />
       <ChatControls />
     </div>
   );
