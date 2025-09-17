@@ -83,7 +83,7 @@ export const ChatControls = ({
         <Button
           size="compact"
           shape="circle"
-          disabled={loading}
+          disabled={loading || !value}
           onClick={handleAction}
         >
           <FaArrowUp size={18} />

@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-## Getting Started
+## How to Run the App
 
 First, run the development server:
 
@@ -14,27 +14,28 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. Start by sending a message to the LLM
+and the chat continues from there.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Scope of Improvements
+1. While doing frontend development, I prefer to do TDD only for the critical logical utils, hooks and some business-critical components in React. But, due to more time required to setup Jest (testing framework) and react-testing-library, I have not added tests in this repo yet. Maybe we can take that up on the onsite day.
+2. I have built the design completely out of my own mind in limited time, that can be improved with more time.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Features that can be built during on-site (or more)
+1. Currently, I have disabled sending another message till the LLM does not response, we can add support to stop the current in-flight request and issue a new message to the bot.
+2. Light / Dark theme toggle support
+3. A Chatgpt like GUI to show previous chats persisted and the ability to continue any of the previous chats
+4. Option to select a chat wallpaper
+5. Bot-Bot auto-chat
+6. AI Chatroom
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Screenshots
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Initial State
+![Initial State UI](./public/initial_state.png)
 
-## Learn More
+### 2. User & Bot Messages
+![User & Bot Messages](./public/bot_reply.png)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+### 3. Loading State
+![Loading State](./public/loading_state.png)
