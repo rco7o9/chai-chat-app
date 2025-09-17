@@ -1,4 +1,5 @@
 // libs
+import { useRef, useLayoutEffect } from "react";
 import { Skeleton } from "baseui/skeleton";
 
 // constants
@@ -58,8 +59,18 @@ export const ChatBody = ({
   className: string;
   messages: ChatMessage[];
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (el) {
+      el.scrollTop = el.scrollHeight;
+    }
+  }, [messages]);
+
   return (
     <div
+      ref={containerRef}
       className={`${className} flex flex-col justify-start gap-8 overflow-y-scroll`}
     >
       {messages.map((message) => {
