@@ -1,21 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
 ## How to Run the App
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. Start by sending a message to the LLM
-and the chat continues from there.
+1. Take a clone of this repo on your local machine.
+2. Run yarn install or npm install
+3. Run the development server using yarn dev or npm dev
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Start by sending a message to the LLM and the chat continues from there.
 
 ## Scope of Improvements
 1. While doing frontend development, I prefer to do TDD only for the critical logical utils, hooks and some business-critical components in React. But, due to more time required to setup Jest (testing framework) and react-testing-library, I have not added tests in this repo yet. Maybe we can take that up on the onsite day.
