@@ -1,5 +1,5 @@
 // components
-import { ChatWidget } from "@/components/ChatWidget";
+import { ChatWidget } from "@/components/chatWidget";
 import { PageLayout } from "@/components/PageLayout";
 
 // types
