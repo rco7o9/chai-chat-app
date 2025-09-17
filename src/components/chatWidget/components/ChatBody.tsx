@@ -51,35 +51,12 @@ const UserMessage = ({
   );
 };
 
-const DUMMY_MESSAGES = [
-  {
-    id: "1",
-    sender: SENDER.User,
-    message: "Hi Batman",
-  },
-  {
-    id: "2",
-    sender: SENDER.Bot,
-    message: "Hi User",
-  },
-  {
-    id: "3",
-    sender: SENDER.User,
-    message: "Some other message from user",
-  },
-  {
-    id: "4",
-    sender: SENDER.Bot,
-    message: "Some other message by bot",
-  },
-];
-
 export const ChatBody = ({
   className,
-  messages = DUMMY_MESSAGES,
+  messages,
 }: {
   className: string;
-  messages?: ChatMessage[];
+  messages: ChatMessage[];
 }) => {
   return (
     <div

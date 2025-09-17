@@ -5,10 +5,15 @@ import { JSX } from "react";
 import { ChatBody } from "./components/ChatBody";
 import { ChatControls } from "./components/ChatControls";
 
+// hooks
+import { useLLMChat } from "@/hooks/useLLMChat";
+
 // images
 import background from "@/assets/space.png";
 
 export const ChatWidget = (): JSX.Element => {
+  const [onAction, { loading, messages }] = useLLMChat();
+
   return (
     <div
       style={{
@@ -18,8 +23,8 @@ export const ChatWidget = (): JSX.Element => {
       }}
       className="relative h-full w-lg m-auto p-4 rounded-2xl flex flex-col justify-between gap-10"
     >
-      <ChatBody className="flex-1" />
-      <ChatControls />
+      <ChatBody className="flex-1" messages={messages} />
+      <ChatControls loading={loading} onAction={onAction} />
     </div>
   );
 };
